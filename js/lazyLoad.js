@@ -95,6 +95,7 @@ LazyLoad.prototype.checkStopScrollTime = function() {
     let util = self._util;
 
     return function() {
+    console.log(12)
         let now = new Date();
         if(now - util.beforeScrollTime > self.option.forAutoLoad) {
             util.STATUS = 'stop';
@@ -242,6 +243,7 @@ LazyLoad.prototype.scroll = function() {
                 if(--util.count <= 0) {
                     if(util.callback) {
                         util.callback();
+                        console.log('已经加载完成啦~');
                     }
                 }
             }
@@ -257,7 +259,7 @@ LazyLoad.prototype.scroll = function() {
             //手动减少长度
             i--;
             if(--len <= 0) {
-                console.log('已经加载完成啦~');
+                clearInterval(util.scrollTimer);
                 self.destroy();
             }
         }
