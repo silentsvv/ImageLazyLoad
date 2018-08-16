@@ -85,18 +85,18 @@ LazyLoad.prototype.init = function() {
     self.bindEvent(window, 'resize', util.scrollFn);
 
     if(self.option.forAutoLoad) {
-        let checkStopScrollTime = self.checkStopScrollTime();
+        var checkStopScrollTime = self.checkStopScrollTime();
         util.scrollTimer = setInterval(checkStopScrollTime, 100);
     }
 }
 
 LazyLoad.prototype.checkStopScrollTime = function() {
-    let self = this;
-    let util = self._util;
+    var self = this;
+    var util = self._util;
 
     return function() {
     console.log(12)
-        let now = new Date();
+        var now = new Date();
         if(now - util.beforeScrollTime > self.option.forAutoLoad) {
             util.STATUS = 'stop';
             clearInterval(util.scrollTimer);
@@ -111,15 +111,15 @@ LazyLoad.prototype.autoLoadImage = function() {
 
     if(util.STATUS == 'scroll') {
         console.log('继续滚动中');
-        let checkStopScrollTime = self.checkStopScrollTime();
+        var checkStopScrollTime = self.checkStopScrollTime();
         util.scrollTimer = setInterval(checkStopScrollTime, 100);
         return false;
     }
 
     if(util.elements.length > 0) {
-        let item = util.elements[0];
-        let srcLink = item.getAttribute(self.option.prefix);
-        let image = new Image();
+        var item = util.elements[0];
+        var srcLink = item.getAttribute(self.option.prefix);
+        var image = new Image();
         image.src = srcLink;
 
         image.onload = function() {
@@ -205,7 +205,7 @@ LazyLoad.prototype.unbindEvent = function(ele, type, fn) {
  * @param 
  */
 LazyLoad.prototype.resetViewport = function() {
-    let self = this;
+    var self = this;
 
     return throttle(function() {
         this._viewport = {
@@ -228,41 +228,43 @@ LazyLoad.prototype.scroll = function() {
     util.STATUS = 'scroll';
     util.beforeScrollTime = new Date();
 
-    for(let i = 0, len = util.elements.length; i < len; i++) {
-        let item = util.elements[i];
-        let result = self.checkInView(item, self._viewport); //检测是否在页面中
-        if(result) {
-            let srcLink = item.getAttribute(self.option.prefix);
-            let image = new Image();
-            image.src = srcLink;
+    for(var i = 0, len = util.elements.length; i < len; i++) {
+        (function() {
+            var item = util.elements[i];
+            var result = self.checkInView(item, self._viewport); //检测是否在页面中
+            if(result) {
+                var srcLink = item.getAttribute(self.option.prefix);
+                var image = new Image();
+                image.src = srcLink;
 
-            image.onload = function() {
-                item.src = srcLink;
-                item.classList.remove(self.option.loadingClassName);
-                item.classList.add(self.option.loadedClassName);
-                if(--util.count <= 0) {
-                    if(util.callback) {
-                        util.callback();
-                        console.log('已经加载完成啦~');
+                image.onload = function() {
+                    item.src = srcLink;
+                    item.classList.remove(self.option.loadingClassName);
+                    item.classList.add(self.option.loadedClassName);
+                    if(--util.count <= 0) {
+                        if(util.callback) {
+                            util.callback();
+                            console.log('已经加载完成啦~');
+                        }
                     }
                 }
-            }
 
-            image.onerror = function() {
-                if(util.errorFn) {
-                    util.errorFn();
+                image.onerror = function() {
+                    if(util.errorFn) {
+                        util.errorFn();
+                    }
+                }
+
+                util.elements.splice(i, 1);
+
+                //手动减少长度
+                i--;
+                if(--len <= 0) {
+                    clearInterval(util.scrollTimer);
+                    self.destroy();
                 }
             }
-
-            util.elements.splice(i, 1);
-
-            //手动减少长度
-            i--;
-            if(--len <= 0) {
-                clearInterval(util.scrollTimer);
-                self.destroy();
-            }
-        }
+        })()
     }
 }
 
@@ -270,8 +272,8 @@ LazyLoad.prototype.initPreloadImage = function() {
     var self = this;
     var util = self._util;
     
-    for(let i = 0, len = util.elements.length; i < len; i++) {
-        let item = util.elements[i];
+    for(var i = 0, len = util.elements.length; i < len; i++) {
+        var item = util.elements[i];
         
         item.classList.add(self.option.loadingClassName);
         if(self.option.preloadImage) {
@@ -286,7 +288,7 @@ LazyLoad.prototype.initPreloadImage = function() {
  * @param 
  */
 LazyLoad.prototype.scrollThrottle = function() {
-    let self = this;
+    var self = this;
     
     return throttle(function() {
         this.scroll();
@@ -299,11 +301,11 @@ LazyLoad.prototype.scrollThrottle = function() {
  * @param 
  */
 LazyLoad.prototype.toArray = function() {
-    let array = [];
-    let self = this;
-    let doms = document.querySelectorAll(self.option.selector);
+    var array = [];
+    var self = this;
+    var doms = document.querySelectorAll(self.option.selector);
 
-    for(let i = 0, len = doms.length; i < len; i++) {
+    for(var i = 0, len = doms.length; i < len; i++) {
         array.push(doms[i]);
     }
 
@@ -317,8 +319,8 @@ LazyLoad.prototype.toArray = function() {
  * @param {object} viewport 坐标信息对象
  */
 LazyLoad.prototype.checkInView = function(ele, viewport) {
-    let self = this;
-    let rect = ele.getBoundingClientRect();
+    var self = this;
+    var rect = ele.getBoundingClientRect();
     rect.right = rect.right*self.option.rectScale;
     rect.bottom = rect.bottom*self.option.rectScale;
     rect.left = rect.left*self.option.rectScale;
