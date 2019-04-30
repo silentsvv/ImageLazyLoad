@@ -1,71 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        .wrap {
-            margin-top: 400px;
-            height: 1000px;
-            overflow: auto;
-        }
-
-        img {
-            height: 600px;
-            width: 400px;
-        }
-
-        .loading {
-            background: #ccc;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,body {
+      min-height: 2000px;
+    }
+    .container {
+      width: 300px;
+    }
+    img {
+      width: 100%;
+      height: 400px;
+    }
+    .loading {
+      background: #000;
+    }
+  </style>
 </head>
 <body>
-    <div class="wrap">
-        <div class="scroll">
-            <div class="box">
-                <img height="1400px" data-src="http://imgcdn50.zuzuche.com/assets/hydra/m_v2/hb2018/images/canada-banner-bg-1951351d1d08fe89fabacfd0236f5b4c.jpg" alt="">
-            </div>
-            <div class="box1">
-                <img data-src="http://imgcdn50.zuzuche.com/tantu/image/20160906/20160906144454_35624.jpg" alt="">
-            </div>
-            <div class="box2">
-                <img data-src="http://imgcdn50.zuzuche.com/tantu/goods/image/20170322/20170322155133_96494.png" alt="">
-            </div>
-            <div class="box2">
-                <img data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-1-02.jpg" alt="">
-            </div>
-            <div class="box2">
-                <img  data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-1-01.jpg" alt="">
-            </div>
-            <div class="box2">
-                <img data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-1-03.jpg" alt="">
-            </div>
-            <div class="box2">
-                <img data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-2-01.jpg" alt="">
-            </div>
-        </div>
-    </div>
-    
-   <img data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-2-02.jpg" alt="">
-
-        <img data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-2-03.jpg" alt="">
-
-        <img data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-3-01.jpg" alt="">
-
-        <img data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-3-02.jpg" alt="">
-
-        <img data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-3-03.jpg" alt="">
-
-        <img data-src="http://imgcdn50.zuzuche.com/assets/hydra/m/canada_m/image/canada-4-01.jpg" alt="">
+  <div class="container">
+    <img data-src="http://imgcdn50.zuzuche.com/mk_topic/201807/17/ea7d12eb68797cc647dee0c13f5a81b5.jpeg" alt="">
+    <img data-src="http://imgcdn50.zuzuche.com/mk_topic/201807/19/8ad9d02e89ec21e3aa6f793c3c69b0fd.jpeg" alt="">
+    <img data-src="" alt="">
+    <img data-src="http://imgcdn50.zuzuche.com/mk_topic/201807/17/320ad34c6bc83885bb702cf505963854.jpeg" alt="">
+    <img data-src="http://imgcdn50.zuzuche.com/mk_topic/201807/19/4a7bfa83c8423ff8b2f366da4be76728.png" alt="">
+    <img data-src="http://imgcdn50.zuzuche.com/mk_topic/201807/19/f05f5b8ab48ecaf2ba39abeb09370869.png" alt="">
+    <img data-src="http://imgcdn50.zuzuche.com/mk_topic/201807/17/440256fdf82b1904f02edc4174b1eb6f.jpeg" alt="">
+    <img data-src="http://imgcdn50.zuzuche.com/mk_topic/201807/17/83f0198d9154487289cd01e108c28fe5.jpeg" alt="">
+    <img data-src="http://imgcdn50.zuzuche.com/mk_topic/201807/19/0d7b10db76446243094e1896978e963d.jpeg" alt="">
+  </div>
 </body>
+
 </html>
-<script src="./js/lazyLoad.js"></script>
+<script src="./js/vconsole.min.js"></script>
+<script src="https://imgcdn50.zuzuche.com/assets/hydra/m/seibertran/js/lazyLoad.js"></script>
 <script>
+  var vConsole = new VConsole();
+
+  try {
     new LazyLoad({
-        containerClass: '.wrap',
-        forAutoLoad: 3000
+      containerClass: 'container',
+      distance: 100,
+      forAutoLoad: 3000
     })
+  } catch (error) {
+    alert(error)
+  }
+  
 </script>
